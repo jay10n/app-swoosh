@@ -17,13 +17,15 @@ class LeagueVC: UIViewController {
         super.viewDidLoad()
 
         player = Player()
-        // Do any additional setup after loading the view.
+        
     }
 
     @IBAction func onNextTapped(_ sender: Any) {
+        //Segue to skillVC
         performSegue(withIdentifier: "skillVCSegue", sender: self)
     }
     
+    //Store the users selection in the player variable
     @IBAction func onMensTapped(_ sender: Any) {
         selectLeague(leagueType: "mens")
     }
@@ -36,19 +38,18 @@ class LeagueVC: UIViewController {
         selectLeague(leagueType: "coed")
     }
     
+    
     func selectLeague(leagueType: String) {
+        //allow the user to continue onto skillVC by enabling nextBtn
         player.desiredLeague = leagueType
         nextBtn.isEnabled = true
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let skillVC = segue.destination as? SkillVC {
+            skillVC.player = player
+            
+        }
     }
-    */
 
 }
